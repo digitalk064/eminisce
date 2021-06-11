@@ -1,0 +1,25 @@
+<style>
+  html, body
+  {
+    background-image: url("/static/uow_ducks.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  body.login
+  {
+    background: rgba(0,0,0,0) !important;
+  }
+</style>
+
+{% extends 'admin/login.html' %}
+{% block branding %}
+  <div class = "head">
+    <h1 id = "name">Head Admin Login</h1>
+  </div>
+{% endblock %}
+{% block content %}
+{{ block.super }}
+<a href = "/login">Regular Login</a>
+{% endblock %}

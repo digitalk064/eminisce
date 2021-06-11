@@ -1,0 +1,77 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+{% load i18n %}
+{% block submit_buttons_bottom %}
+  {% if not group %} <!-- If there's no group info then we're probably not in the changing room view-->
+    {{ block.super }}
+  {% else %}  <!-- Only customize the page if we are actually in the change view -->
+    <h1>Room (#<span id = "room_id">{{r_id}}</span>) status: <b>{{status}}</b></h1>
+    
+    {% if group == "Admin" %}
+      <style>
+        #view_usage * {
+          font-size: 1.1em !important;
+        }
+      </style>
+      <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+      <script src = "{% static 'js/admin/admin_book_view.js' %}"></script>
+
+      <script>
+        $(document).ready(function() {
+          $("#view_usage").hide();
+          
+        });
+
+        function toggleUseView()
+        {
+          $("#view_usage").show();
+          location.href = "#view_usage";
+          initView();
+        }
+      </script>
+
+        <input type = "button" value = "View Usage" name = "_viewuse" style = "font-size: 1.5em; float:left; pointer-events: auto; background-color: blue;" onclick = "toggleUseView()">
+      {% if status != "APPROVED" %}
+        <input type = "submit" value = "Approve" name = "_approve" style = "font-size: 1.5em; float:right; pointer-events: auto; background-color: green;">
+      {% endif %}
+      {% if status != "REJECTED" %}
+        <input type = "submit" value = "Reject" name = "_reject" style = "font-size: 1.5em; margin-right: 5px; float:right; pointer-events: auto; background-color: red;">
+      {% endif %}
+    {% else %}
+      {{ block.super }}
+    {% endif %}
+  {% endif %}
+{% endblock %} 
+
+{% block footer %}
+{% if group == "Admin" %}
+<div id = "view_usage" style = "padding-left: 40px; min-height:500px">
+  {% if use_form %}
+          <form method="POST" id = "use_form" name = "admin_view_room_usage">
+            {% csrf_token %}
+            {{use_form.media}}
+            {{use_form}}
+          </form>
+  {% endif %}
+
+  <div id = "results" style = "min-height:500px; width: 500px">
+    <table class = "table" id = "results_table">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 1000px;"><span style = "font-size: 0.8em !important;">All bookings</span>
+              <button form = "use_form" style = "border:0px; background-color: rgba(0,0,0,0);float:right;height:20px">🔄</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody style = "font-size: 0.7em !important">
+          
+        </tbody>
+    </table>
+  </div>
+
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <link rel="shortcut icon" href="{% static 'favicon.png' %}"/>
+  <title>SIM Library - Eminisce System</title>
+  <!-- Load jQuery -->
+  <script src="{% static '/js/jquery-3.6.0.min.js' %}" 
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+  ></script>
+  <!-- Load Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+  <script src="{% static '/js/bootstrap.bundle.min.js' %}">  </script>
+  <style type="text/css">
+    html, body
+    {
+      background-color: #191919;
+    }
+    .main-body
+    {
+      min-height: calc(100vh - 52px - 100px) !important;
+    }
+    footer
+    {
+      min-height: 20px !important;
+    }
+    .jumbotron {
+        background: #191919;
+        color: white;
+        padding-bottom: 10px;
+        margin-bottom: 0px !important;
+    }
+    .jumbotron p {
+        color: #d9ccee;
+        max-width: 75%;
+        margin: 1em auto 2em
+    }
+    .navbar+.jumbotron {
+        margin-bottom: 0px !important;
+    }
+    .navbar{
+        margin-bottom: 0px !important;
+    }
+    .jumbotron .lang-logo {
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+        max-width: 150px;
+        height: auto;
+        margin: auto;
+        position: relative;
+    }
+    .jumbotron .lang-logo img {
+        max-width: 100%
+    }
+    .btn-lol{
+        background: #ffffff;
+        border-color: #ff0000
+    }
+    .alert
+    {
+      margin-bottom: 0px;
+    }
+    /* Workaround for style conflict */
+    .alert-error /* Supposed to be alert-danger, just copy alert-danger content into this */
+    {
+      color:#721c24;
+      background-color:#f8d7da;
+      border-color:#f5c6cb;
+    }
+    .invalid-feedback
+    {
+      color:red !important;
+      font-size:15px !important;
+      max-height: 2px;
+    }
+    .is-invalid
+    {
+      border-color:red !important;
+    }
+  </style>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li style = "margin-right: 5px;">
+        <img alt = "logo" src="{% static 'logo_uow_white.png'%}" style = "width:150px;">
+      </li>
+      <li class="{{home_page}}">
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Rooms</a>
+      </li>
+      <!--<li class = "{{rooms}}"><a href="/rooms">Rooms</a></li> !-->
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if not user.is_authenticated %}
+      <!--
+      <li class="navbar-right">
+        <a href="{% url 'register' %}">Register</a>
+      </li>
+      -->
+      <li class="navbar-right">
+        <a href="{% url 'login' %}">Login </a>
+      </li>
+      {% else %}
+      <li class="navbar-right">
+        <a href="{% url 'logout' %}">Logout ({{user.get_username}})</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<div class="main-body">
+{% if messages %}
+  {% for message in messages %}
+    <div class = "alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+{% block content %}{% endblock %}
+</div>
+</body>
+
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Text -->
+    <section class="mb-4">
+      <p>This website is part of the Final Year Project belonging to group FYP-21-S2-16</p>
+    </section>
+    <!-- Section: Text -->
+  </div>
+  <!-- Grid container -->
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © Copyright 2021 Singapore Institute of Management (SIM) |
+    <a href="https://library.sim.edu.sg/SitePages/Terms-of-Use.aspx" target="_blank">Terms of Use</a> |
+    <a href="http://www.sim.edu.sg/about-sim/pages/dataprivacy.aspx" target="_blank">Data Privacy</a> |
+    <a href="https://pd.sim.edu.sg/personal-data-protection-policy" target="_blank">Personal Data Protection Policy</a>
+  </div>
+</footer>
+
+</html>

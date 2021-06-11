@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  form input{
+    color:black;
+  }
+</style>
+
+<script src = "{% static 'js/testjs2.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    
+  });
+</script>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1>Join</h1>
+    <p>Create your university account here</p>
+    <div class = "container" style="max-width:500px">
+      <form method = "POST">
+        {% csrf_token %}
+        <fieldset class = "form-group">
+          {{form|crispy}}
+        </fieldset>
+        <input class = "btn btn-primary" type = "submit" value = "Sign up" style="border-radius:10px;font-size:30px;width:120px;height:50px">
+      </form>
+      <p>Already have an account?<a href="{% url 'login' %}"> Login</a> here</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

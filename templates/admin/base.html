@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block extrastyle %}
+<style>
+    #content h1
+    {
+        display:none;
+    }
+    #content a
+    {
+        font-size: 1.5em;
+    }
+    #content-related h3
+    {
+        font-size: 1.5em;
+    }
+    .module table tr
+    {
+        height: 50px;
+    }
+    .module table th, td
+    {
+        vertical-align: middle;
+    }
+    .results td {
+        font-size: 1.35em;
+    }
+    .object-tools {
+        font-size: 0.7em;
+        margin-top: 0px;
+        z-index: 1 !important;
+    }
+    .form-row {
+        font-size: 1.15em !important;
+    }
+    .form-row label {
+        font-size: 1.15em !important;
+    }
+    #changelist-filter
+    {
+        margin-top: 50px !important;
+    }
+</style>
+{% endblock %}

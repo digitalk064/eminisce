@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  form input{
+    color:black;
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+    var redirect = "{{request.META.HTTP_REFERER}}";
+    setTimeout(function() { location.href = redirect;}, 1500)
+  });
+</script>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1>You have logged out</h1>
+    {% if '/account/logout/' not in request.META.HTTP_REFERER %}
+    <p>
+        You will be redirected to {{request.META.HTTP_REFERER}} in a second
+    </p>
+    {% else %}
+      <p><a href = "{% url 'login' %}">Login again</a></p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+

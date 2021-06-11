@@ -1,0 +1,10 @@
+{% extends 'registration/logged_out.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<p>{% trans "Thank you for your hard work." %}</p>
+
+<p><a href="{% url 'admin:index' %}">{% trans 'Log in again' %}</a></p>
+
+{% endblock %}

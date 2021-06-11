@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  html, body
+  {
+    background-image: url("/static/uow_ducks.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  form input{
+    color:black;
+  }
+  .navbar{
+    visibility: hidden !important;
+  }
+  .jumbotron{
+    background: #e7e7e770;
+  }
+  .jumbotron p{
+    color:#373a3c;
+  }
+  .requiredField
+  {
+    color: #373a3c;
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+    
+  });
+</script>
+
+<div class="jumbotron text-center" style = "width: 50%; margin: auto">
+  <img src="{% static 'logo_uow_blue.png'%}">
+  <div class="container">
+    <p><b>Please login to your library account.</b></p>
+    <div class = "container" style="margin-top: -30px; max-width:500px">
+      <form method = "POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <input class= "btn btn-primary" type = "submit" value = "Login" style="font-size:30px;width:120px;height:50px">
+      </form>
+    </div>
+    <p>Trouble logging in? Please contact Student Central</p>
+  </div>
+</div>
+
+{% endblock %}
+

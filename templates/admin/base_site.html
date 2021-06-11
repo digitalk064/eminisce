@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block branding %}
+<style>
+    #header {
+        padding: 2px 40px !important;
+        background: #3574ac;
+        box-shadow: 0px 3px 7px black;
+    }
+    #user-tools {
+        font-size: 1em;
+    }
+    .module caption {
+        background: #3574ac;
+        box-shadow: 1px 2px 1px black;
+    }
+    .calendar table tr {
+        height:20px;
+    }
+    .aligned .form-row * {
+        margin-bottom: 0;
+        font-size: 1em;
+    }
+    .aligned p.file-upload {
+        margin-left: 170px;
+        font-size: 0.9em;
+    }
+    .submit-row input{
+        font-size: 1.3em;
+    }
+</style>
+<img alt = "logo" src="{% static 'logo_uow_white.png'%}" style = "width:150px;display:inline-flex">
+<div style = "display:inline-flex;vertical-align: top; padding-top: 10px;">
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+</div>
+{% endblock %}
