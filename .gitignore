@@ -4,5 +4,3 @@ staticfiles
 #Ignore this file to not use SQLite on the production server
 .env 
 .vscode/settings.json
-
-# test
