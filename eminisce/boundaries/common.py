@@ -21,6 +21,6 @@ def index(request):
     #If user is staff, take user to admin page right away
     if request.user.is_staff:
         return redirect('admin:index')
-    context = {"home_page" : "active"} #change navbar active element
+    context = {"home_active" : "active"} #change navbar active element
 
-    return render(request, "index.html", context)
+    return render(request, "user/index.html", context)
