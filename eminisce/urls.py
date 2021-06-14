@@ -19,17 +19,20 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-import eminisce.boundaries.common
+import eminisce.controllers.common
+from eminisce.controllers.user import browse_catalog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",  eminisce.boundaries.common.index, name="index"),
+    path("",  eminisce.controllers.common.index, name="index"),
     path("admin/", admin.site.urls, name = "admin"),
     
     path("login/", auth_views.LoginView.as_view(template_name ="login.html"), name = "login"),
     #Since a registering page shouldnt exist, we just redirect it to the login page
     path("register/", auth_views.LoginView.as_view(template_name ="login.html"), name = "register"),
-    path("logout/", auth_views.LogoutView.as_view(template_name ="logout.html"), name = "logout")
+    path("logout/", auth_views.LogoutView.as_view(template_name ="logout.html"), name = "logout"),
+
+    path("browse/", browse_catalog.browse, name = "browse_catalog"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
