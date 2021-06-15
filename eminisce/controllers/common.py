@@ -20,7 +20,11 @@ import requests
 def index(request):
     #If user is staff, take user to admin page right away
     if request.user.is_staff:
-        return redirect('admin:index')
-    context = {"home_active" : "active"} #change navbar active element
+        context = {"home_active" : "active"} #change navbar active element
 
-    return render(request, "user/index.html", context)
+        return render(request, "librarian/index.html", context)
+    
+    else:
+        context = {"home_active" : "active"} #change navbar active element
+
+        return render(request, "user/index.html", context)

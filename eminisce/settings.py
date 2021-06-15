@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'bootstrap_datepicker_plus',
+    "django_tables2",
     'eminisce'
 ]
 
@@ -140,3 +141,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"

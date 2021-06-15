@@ -21,18 +21,30 @@ from django.conf.urls.static import static
 
 import eminisce.controllers.common
 from eminisce.controllers.user import browse_catalog
+from eminisce.controllers.librarian import create_user, user_management, delete_user, edit_user
 
 urlpatterns = [
+    # Admin places
     path('admin/', admin.site.urls),
     path("",  eminisce.controllers.common.index, name="index"),
     path("admin/", admin.site.urls, name = "admin"),
     
+    # Common places
     path("login/", auth_views.LoginView.as_view(template_name ="login.html"), name = "login"),
     #Since a registering page shouldnt exist, we just redirect it to the login page
     path("register/", auth_views.LoginView.as_view(template_name ="login.html"), name = "register"),
     path("logout/", auth_views.LogoutView.as_view(template_name ="logout.html"), name = "logout"),
 
+    # User places
     path("browse/", browse_catalog.browse, name = "browse_catalog"),
+
+    # Librarian places
+    path("librarian/accounts", user_management.index, name = "librarian_manage_user"),
+    path("librarian/createuser", create_user.create_user, name = "librarian_create_user"),
+    # Reverses (for actions on objects)
+    path('librarian/accounts/edit_user/<int:edit_id>', edit_user.edit_user, name='edit_user'),
+    path('librarian/accounts/delete_user/<int:del_id>', delete_user.delete_user, name='delete_user')
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

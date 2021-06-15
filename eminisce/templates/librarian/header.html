@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" id="user_header">
+    <div class="container"><a href="/"><img src="/media/library-logo.png" loading="eager" /></a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link {{home_active}}" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link {{accounts_active}}" href="/librarian/accounts">Accounts</a></li>
+                <li class="nav-item"><a class="nav-link {{books_active}}" href="/librarian/books">Books</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link" href="#"> <img class="dropdown-image" src="/media/user_avatar.png" />{{user.get_username}}</a>
+                    <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">My account</a><a class="dropdown-item" href="#">My library</a><a class="dropdown-item" href="/logout">Logout</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

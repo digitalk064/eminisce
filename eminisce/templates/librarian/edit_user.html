@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include "librarian/header.html" %}
+
+<div class="container" id="main_body" style="padding-top: 30px;">
+    <h3>Editing {{user_fullname}}</h3>
+    <div class="jumbotron" style="padding-top: 32px;">
+        <div>{% if form %}
+            <form method="POST" id="create_user_form" name="create_user">
+                {% csrf_token %}
+                {{form|crispy}}
+                {{ form.media }}
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
