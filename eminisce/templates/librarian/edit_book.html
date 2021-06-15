@@ -5,10 +5,10 @@
 {% include "librarian/header.html" %}
 
 <div class="container" id="main_body" style="padding-top: 30px;">
-    <h3>Editing {{user_fullname}}</h3>
+    <h3>Editing {{book_barcode}}</h3>
     <div class="jumbotron" style="padding-top: 32px;">
         <div>{% if form %}
-            <form method="POST" id="edit_user_form" name="edit_user">
+            <form method="POST" id="edit_book_form" name="edit_book" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
                 {{ form.media }}

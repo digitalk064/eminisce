@@ -2,6 +2,7 @@ import django_tables2 as tables
 from django_tables2.utils import A
 
 from eminisce.models.libraryuser import LibraryUser
+from eminisce.models.book import Book
 
 class LibraryUserTable(tables.Table):
     user = tables.Column(verbose_name="ID Number")
@@ -17,3 +18,15 @@ class LibraryUserTable(tables.Table):
         template_name = "django_tables2/bootstrap4.html"
         attrs = {"class": "table table-hover"}
         exclude = ('id', "status", 'fingerprint')
+
+
+class BookTable(tables.Table):
+    actions = tables.TemplateColumn(orderable=False, template_name='librarian/dynamic/book_row_buttons.html', verbose_name="")
+    coverimg = tables.TemplateColumn('<img src="/media/{{record.cover}}" style="max-height:70px"', verbose_name="", orderable=False)
+
+    class Meta:
+        model = Book
+        template_name = "django_tables2/bootstrap4.html"
+        attrs = {"class": "table table-hover"}
+        sequence = ("coverimg", "...")
+        exclude = ('cover', 'description', )

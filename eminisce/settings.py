@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'bootstrap_datepicker_plus',
     "django_tables2",
-    'eminisce'
+    'eminisce',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
