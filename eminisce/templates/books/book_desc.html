@@ -14,17 +14,7 @@
   #details, #avail, #reserve {
   scroll-behavior: smooth;
 }
-  #avail_table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-  td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;
@@ -71,70 +61,90 @@
     </div>
 </div>
 <div class="row" id="browse_container">
-        <div class="col-md-10" style="padding-left: 50px;">
-             <ul class="list-unstyled" id="details" style="padding-left: 50px; padding-top: 20px">
+        <div id="details" class="col-md-10" style="padding-left: 50px;">
+             <ul class="list-unstyled" style="padding-left: 50px; padding-top: 20px">
                 <li>
                         <h5>Details<br></h5>
                         <br>
                         <div class="grid-container" style="width:920px">
                                        
-                                        <div>Title</div>
-                                        <div id="title" style="padding-left: 20px;">Python Programming from Beginner to Immediate in 7 days</div>
- 
-                                        <div>Author</div>
-                                        <div id="author" style="padding-left: 20px;">Cal Baron</div>
+                            <div>Title</div>
+                            <div id="title" style="padding-left: 20px;">Python Programming from Beginner to Immediate in 7 days</div>
 
-                                        <div>Description</div>
-                                        <div id="description" style="padding-left: 20px;">Python can be used to create just about any kind of programming project you can imagine. When you understand how to program in Python, you unlock a world of computing power and possibilities. Get the most out of Python simply by following the easy coding examples and projects fully explained inside this guide. It doesn’t matter if you have never programmed anything before. This step-by-step guide gives you everything you need to know to do more with Python than you ever thought possible!</div>
-  
-                                        <div>Creation Date</div>
-                                        <div id="create_date" style="padding-left: 20px;">2019</div>
-                                
-                                        <div>Language</div>
-                                        <div id="lang" style="padding-left: 20px;">English</div>     
+                            <div>Author</div>
+                            <div id="author" style="padding-left: 20px;">Cal Baron</div>
+
+                            <div>Description</div>
+                            <div id="description" style="padding-left: 20px;">Python can be used to create just about any kind of programming project you can imagine. When you understand how to program in Python, you unlock a world of computing power and possibilities. Get the most out of Python simply by following the easy coding examples and projects fully explained inside this guide. It doesn’t matter if you have never programmed anything before. This step-by-step guide gives you everything you need to know to do more with Python than you ever thought possible!</div>
+
+                            <div>Creation Date</div>
+                            <div id="create_date" style="padding-left: 20px;">2019</div>
+                    
+                            <div>Language</div>
+                            <div id="lang" style="padding-left: 20px;">English</div>     
                         </div>
-                               
-                        <br><hr style="width: 920px">
-                        <div id="avail" style="width:920px">
-                                <h5>Availability<br></h5>
-                                <table id="avail_table">
-                                        <tr>
-                                                <th>Barcode</th>
-                                                <th>Type</th>
-                                                <th>Policy</th>
-                                                <th>Description</th>
-                                                <th>Status</th>
-                                        </tr>
-                                        <tr>
-                                                <td>B134367</td>
-                                                <td>Book</td>
-                                                <td>21 Days Loan</td>
-                                                <td></td>
-                                                <td>Item in place</td>
-                                        </tr>
-                                        <tr>
-                                                <td>B134366</td>
-                                                <td>Book</td>
-                                                <td>21 Days Loan</td>
-                                                <td></td>
-                                                <td>Item in place</td>
-                                        </tr>
-                                </table>
-                        </div>
-                        <br><hr style="width: 920px">
-                        <div id="reserve" style="width:920px">
-                                <h5>Reserve it Now!<br></h5>
-                                <h6>Choose the available book to reserve</h6>
-                                <select name="book_code" id="book_code" style="height: 30px; width: 100px"; >
-                                        <option value="B134367">B134367</option>
-                                        <option value="B134366">B134366</option>
-                                </select>
-                                
-                                <input type="submit" value="Submit"/>
-                        </div>
-                </li>
-            </ul>
+                        </li>
+                </ul>
         </div>
+                               
+        <br><hr style="width: 920px">
+        <div id="avail" style="width:920px">
+            <h5 class="text-start" style="padding-left: 94px;">Availability</h5>
+            <div class="table-responsive" id="avail" style="width: 1010px;padding-left: 94px;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Barcode</th>
+                            <th>Type</th>
+                            <th>Policy</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>B134367</td>
+                            <td>Book</td>
+                            <td>21 Days Loan</td>
+                            <td></td>
+                            <td>Item in place</td>
+                        </tr>
+                        <tr>
+                            <td>B134366</td>
+                            <td>Book</td>
+                            <td>21 Days Loan<br /></td>
+                            <td></td>
+                            <td>Item in place<br /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>   
+        </div>
+   
+        <hr style="width: 920px;margin-left: 94px;" />
+        <h5 class="text-start" id="reserve" style="padding-left: 94px;">Reserve It Now!</h5>                 
+        <select style="margin-left: 94px;background-color: #8f8f8f;color: #ffffff;border-radius: 6px;height: 40px;width: 300px;">
+            <option value="Choose" selected>Choose the available book to reserve</option>
+            <option value="B134367">B134367</option>
+            <option value="B134393">B134366</option>
+        </select>
+        
+        <button class="btn btn-primary link-light bg-success" id="submit" type="button" style="margin-left: 30px;margin-bottom: 5px;height: 40px;border-radius: 6px;">Submit</button>
+
+        <div role="dialog" tabindex="-1" class="modal fade show" id="Reserve_modal" style="display: block;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Reserved Successful<br /></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>You have successfully reserved this book!<br /></p>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+                </div>
+            </div>
+        </div>
+    </div>              
 </div>
 
 {% endblock %}
