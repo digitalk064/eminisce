@@ -3,6 +3,8 @@ from django_tables2.utils import A
 
 from eminisce.models.libraryuser import LibraryUser
 from eminisce.models.book import Book
+from eminisce.models.loans import Loan
+
 
 class LibraryUserTable(tables.Table):
     user = tables.Column(verbose_name="ID Number")
@@ -30,3 +32,15 @@ class BookTable(tables.Table):
         attrs = {"class": "table table-hover"}
         sequence = ("coverimg", "...")
         exclude = ('cover', 'description', )
+
+class LoanTable(tables.Table):
+    status = tables.Column(verbose_name="Status", accessor="short_status", order_by="status")
+    actions = tables.TemplateColumn(orderable=False, template_name='librarian/dynamic/loan_row_buttons.html', verbose_name="")
+    #coverimg = tables.TemplateColumn('<img src="/media/{{record.cover}}" style="max-height:70px"', verbose_name="", orderable=False)
+
+    class Meta:
+        model = Loan
+        template_name = "django_tables2/bootstrap4.html"
+        attrs = {"class": "table table-hover"}
+        exclude = ('id', )
+
