@@ -1,10 +1,3 @@
-{% extends "base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block content %}
-{% include "user/header.html" %}
-
-
 <style type="text/css">
   #books_list li:hover {
     cursor: pointer;
@@ -31,6 +24,22 @@
   
 }
 </style>
+
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" id="user_header">
+    <div class="container"><a href="/"><img src="/media/library-logo.png" loading="eager" /></a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link {{home_active}}" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link {{browse_active}}" href="/browse">Browse</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link" href="#"> <img class="dropdown-image" src="/media/user_avatar.png" />{{user.get_username}}</a>
+                    <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">My account</a><a class="dropdown-item" href="#">My library</a><a class="dropdown-item" href="/logout">Logout</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
             
 <div class="container" id="main_body" style="padding-top: 30px;">
     <form class="search-form" style="padding-bottom: 10px;height: 70px;">
@@ -72,11 +81,11 @@
 </div>
 <div class="row" id="browse_container">
         <div class="col-md-10" style="padding-left: 50px;">
-             <ul class="list-unstyled" id="details" style="padding-left: 50px; padding-top: 20px">
+             <ul class="list-unstyled" style="padding-left: 50px; padding-top: 20px">
                 <li>
                         <h5>Details<br></h5>
                         <br>
-                        <div class="grid-container" style="width:920px">
+                        <div class="grid-container" id="details" style="width:920px">
                                        
                                         <div>Title</div>
                                         <div id="title" style="padding-left: 20px;">Python Programming from Beginner to Immediate in 7 days</div>
@@ -112,7 +121,7 @@
                                                 <td></td>
                                                 <td>Item in place</td>
                                         </tr>
-                                        <tr>
+                                                                                <tr>
                                                 <td>B134366</td>
                                                 <td>Book</td>
                                                 <td>21 Days Loan</td>
@@ -136,5 +145,3 @@
             </ul>
         </div>
 </div>
-
-{% endblock %}
