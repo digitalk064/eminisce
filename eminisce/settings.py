@@ -149,8 +149,6 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ]
 }

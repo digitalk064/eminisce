@@ -1,7 +1,8 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions, mixins
+from rest_framework.permissions import IsAuthenticated
 
 from eminisce.models.loans import Loan
 from eminisce.models.book import Book
@@ -9,11 +10,11 @@ from eminisce.api.serializers import CreateLoanSerializer, LoanStatusSerializer
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def new_loan(request):
     """
     API for the borrowing machine to call to process a new loan.
     """
-    #permission_classes = [permissions.IsAdminUser]
 
     if request.method == 'POST':
         serializer = CreateLoanSerializer(data=request.data)
@@ -30,11 +31,11 @@ def new_loan(request):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def update_loan(request, pk):
     """
     API for a machine to call to update a loan's status, for example to returned.
     """
-    #permission_classes = [permissions.IsAdminUser]
 
     try:
         loan = Loan.objects.get(pk=pk)
