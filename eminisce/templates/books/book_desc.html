@@ -10,16 +10,7 @@
     cursor: pointer;
     background-color:rgba(200, 200, 200, 0.3) !important;
   }
-        
-  #details, #avail, #reserve {
-  scroll-behavior: smooth;
-}
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  
-}
 </style>
             
 <div class="container" id="main_body" style="padding-top: 30px;">
@@ -34,117 +25,117 @@
                 </div><button class="btn btn-primary" type="button">Search </button>
             </div>
         </div>
-        </form>
-        
-    <div class="row" id="browse_container">
-        <div class="col-md-10" style="padding-left: 20px;">
-            <ul class="list-group" id="books_list">
-                <li class="list-group-item books_list_item" id="books_list_item_id">
-                    <div class="d-flex d-xl-flex justify-content-start justify-content-xl-start" id="books_list_item_book_info"><img class="d-xl-flex justify-content-xl-start" id="books_list_item_thumbnail" src="/media/book_covers/bookcover_1.jpg" style="max-height: 200px;width: 150px;height: 200px;">
-                        <div id="books_list_item_description" style="padding-left: 0px;margin-left: 25px;">
-                            <h5 id="books_list_item_book_title">Python Programming from Beginner to Immediate in 7 days</h5><span id="books_list_item_book_author" style="padding-left: 0px;">Cal Baron. 2019.<br></span>
-                        </div>
-                    </div>
-                    <div class="d-xl-flex justify-content-xl-start" id="books_list_item_avail_info" style="margin-top: 10px;"><span class="text-success" id="books_list_item_avail_status"><strong>Available at Tay Eng Soon Library Course 21 Days (004 HOS) </strong></span></div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-                <ul class="list-unstyled" style="position: fixed;font-size:150%;">
-                        <li><h3 class="text-dark">Navigation<br><br></h3></li>
-                        <li><a class="text-dark" href="#details" style="text-decoration:none">Details<br><br></a></li>
-                        <li><a class="text-dark" href="#avail" style="text-decoration:none">Availability<br><br></a></li>
-                        <li><a class="text-dark" href="#reserve" style="text-decoration:none">Reserve it<br><br></a></li>
-                        
-                </ul>
-        </div>
-    </div>
-</div>
-<div class="row" id="browse_container">
-        <div id="details" class="col-md-10" style="padding-left: 50px;">
-             <ul class="list-unstyled" style="padding-left: 50px; padding-top: 20px">
-                <li>
-                        <h5>Details<br></h5>
-                        <br>
-                        <div class="grid-container" style="width:920px">
-                                       
-                            <div>Title</div>
-                            <div id="title" style="padding-left: 20px;">Python Programming from Beginner to Immediate in 7 days</div>
+    </form>
 
-                            <div>Author</div>
-                            <div id="author" style="padding-left: 20px;">Cal Baron</div>
-
-                            <div>Description</div>
-                            <div id="description" style="padding-left: 20px;">Python can be used to create just about any kind of programming project you can imagine. When you understand how to program in Python, you unlock a world of computing power and possibilities. Get the most out of Python simply by following the easy coding examples and projects fully explained inside this guide. It doesn’t matter if you have never programmed anything before. This step-by-step guide gives you everything you need to know to do more with Python than you ever thought possible!</div>
-
-                            <div>Creation Date</div>
-                            <div id="create_date" style="padding-left: 20px;">2019</div>
-                    
-                            <div>Language</div>
-                            <div id="lang" style="padding-left: 20px;">English</div>     
-                        </div>
+    <div>
+        <div class="container" style="position: relative;">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="book_browsed">
+                            <div id="book_browsed_info" class="d-flex d-xl-flex justify-content-start justify-content-xl-start">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless" id="book_browsed">
+                                        <thead>
+                                            <tr>
+                                                <th><img id="book_browsed_image" class="d-xl-flex justify-content-xl-start" src="media/book_covers/bookcover_1.jpg" style="/*'max-height: 200px;*/width: 150px;height: 200px;" /></th>
+                                                <th>
+                                                    <div id="book_browsed_description" class="justify-content-start" style="margin-left: 20px;padding-left: 0px;position: sticky;">
+                                                        <h5 id="book_browsed_title"><br />Python Programming from Beginner to Immediate in 7 days<br /><br /></h5><span id="book_browsed_author">Cal Boron. 2019.</span>
+                                                        <div class="d-xl-flex justify-content-xl-start&quot;"><span id="book_browsed_availability" class="text-success"><br />Available at Tay Eng Soon Library Course 21 Days (004 HOS)<br /><br /></span></div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </li>
-                </ul>
-        </div>
-                               
-        <br><hr style="width: 920px">
-        <div id="avail" style="width:920px">
-            <h5 class="text-start" style="padding-left: 94px;">Availability</h5>
-            <div class="table-responsive" id="avail" style="width: 1010px;padding-left: 94px;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Barcode</th>
-                            <th>Type</th>
-                            <th>Policy</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>B134367</td>
-                            <td>Book</td>
-                            <td>21 Days Loan</td>
-                            <td></td>
-                            <td>Item in place</td>
-                        </tr>
-                        <tr>
-                            <td>B134366</td>
-                            <td>Book</td>
-                            <td>21 Days Loan<br /></td>
-                            <td></td>
-                            <td>Item in place<br /></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>   
-        </div>
-   
-        <hr style="width: 920px;margin-left: 94px;" />
-        <h5 class="text-start" id="reserve" style="padding-left: 94px;">Reserve It Now!</h5>                 
-        <select style="margin-left: 94px;background-color: #8f8f8f;color: #ffffff;border-radius: 6px;height: 40px;width: 300px;">
-            <option value="Choose" selected>Choose the available book to reserve</option>
-            <option value="B134367">B134367</option>
-            <option value="B134393">B134366</option>
-        </select>
-        
-        <button class="btn btn-primary link-light bg-success" id="submit" type="button" style="margin-left: 30px;margin-bottom: 5px;height: 40px;border-radius: 6px;">Submit</button>
-
-        <div role="dialog" tabindex="-1" class="modal fade show" id="Reserve_modal" style="display: block;">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Reserved Successful<br /></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </ul>
+                    <div>
+                        <h3 id="details" style="margin-top: 10px;">Details</h3>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Title:</td>
+                                        <td id="book_title">Python Programming from Beginner to Immediate in 7 days<br /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Author:</td>
+                                        <td id="book_author">Cal Boron</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Creation Date:</td>
+                                        <td id="book_creationDate">2019</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Language</td>
+                                        <td id="book_lang">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description</td>
+                                        <td class="text-break" id="book_desc">Python can be used to create just about any kind of programming project you can imagine. When you understand how to program in Python, you unlock a world of computing power and possibilities. Get the most out of Python simply by following the easy coding examples and projects fully explained inside this guide. It doesn’t matter if you have never programmed anything before. This step-by-step guide gives you everything you need to know to do more with Python than you ever thought possible!<br /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>You have successfully reserved this book!<br /></p>
+                    <hr />
+                    <div>
+                        <h3 id="avail" style="margin-top: 20px;">Availability</h3>
+                        <div class="col">
+                            <div class="table-responsive d-grid">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th id="book_barcode">Barcode</th>
+                                            <th id="book_type">Type</th>
+                                            <th id="book_policy">Policy</th>
+                                            <th>Description</th>
+                                            <th id="book_status">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>B134367</td>
+                                            <td>Book</td>
+                                            <td>21 Day Loan</td>
+                                            <td></td>
+                                            <td>Item in place</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+                    <hr />
+                    <div>
+                        <h3 id="reserve">Reserve It Now</h3><select id="select_book_barcode" style="background-color: #8f8f8f;color: #ffffff;border-radius: 6px;height: 40px;width: 300px;">
+                            <option value="Choose" selected>Choose the available book to reserve</option>
+                            <option value="B134367">B134367</option>
+                        </select><button class="btn btn-primary bg-success" id="submit" data-toggle="modal" data-target="#submit_modal" style="margin-left: 30px;margin-bottom: 5px;height: 40px;border-radius: 6px;">Submit</button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="submit_modal" aria-labelledby="modal_title" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal_title">Reservation Success </h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>You have successfully reserve this book</p>
+                                    </div>
+                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </div>
-    </div>              
+    </div>
 </div>
-
+    
 {% endblock %}
