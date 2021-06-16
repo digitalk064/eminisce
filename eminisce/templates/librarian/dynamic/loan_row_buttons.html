@@ -1,0 +1,4 @@
+{% if record.status != "RETURNED" and record.status != "RETURNED LATE"  %}
+<a class="btn btn-outline-primary" role="button" href="{% url 'mark_loan_returned' record.pk %}">Mark as returned</a><br>
+<a class="btn btn-outline-primary" role="button">Edit due date</a>
+{% endif %}

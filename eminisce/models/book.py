@@ -28,4 +28,16 @@ class Book(models.Model):
     barcode = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
-        return "Book: " + self.title
+        return self.barcode + " " + self.title
+
+    def set_unavailable(self):
+        self.status = self.Status.UNAVAILABLE
+        self.save()
+    
+    def set_available(self):
+        self.status = self.Status.AVAILABLE
+        self.save()
+    
+    def set_takenoff(self):
+        self.status = self.Status.TAKENOFF
+        self.save()
