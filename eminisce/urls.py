@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -51,7 +51,11 @@ urlpatterns = [
     path("librarian/books", book_management.index, name = "librarian_manage_book"),
     path("librarian/createbook", create_book.create_book, name = "librarian_create_book"),
     path('librarian/books/edit_book/<int:edit_id>', edit_book.edit_book, name='edit_book'),
-    path('librarian/books/delete_book/<int:del_id>', delete_book.delete_book, name='delete_book')
+    path('librarian/books/delete_book/<int:del_id>', delete_book.delete_book, name='delete_book'),
+
+    #REST API
+    path('api/', include('eminisce.api.api_urls')),
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

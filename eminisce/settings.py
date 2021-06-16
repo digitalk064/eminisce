@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'bootstrap_datepicker_plus',
     "django_tables2",
+    'rest_framework',
+    'rest_framework.authtoken',
     'eminisce',
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -144,3 +146,11 @@ LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
