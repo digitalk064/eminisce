@@ -5,12 +5,9 @@
 {% include "user/header.html" %}
 
 
-<div class="container" id="main_body" style="padding-top: 30px;">
-    <div class="container" style="width: 700px;margin: auto;text-align: center;">
+<div class="container" style="width: 700px;margin: auto;text-align: center;">
     <div id="user_profile_details"><img id="profile_image" class="rounded-circle" src="/media/user_avatar.png" style="width: 200px;height: 200px;" />
-        <h1 class="text-center" id="profile_name" style="width: 200px;margin: auto;">
-            <span style="text-decoration: underline;">Test1</span>
-        </h1>
+        <h3 class="text-center d-lg-flex justify-content-lg-center" id="profile_name" style="width: 400px;margin: auto;"><span style="text-decoration: underline;">{{user.libraryuser.fullname}}</span></h3>
         <div class="card text-center my-4">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -19,16 +16,8 @@
             </div>
             <div class="card-body tab-content">
                 <div id="details" class="tab-pane fade show active" role="tabpanel" aria-labelledby="details_tab">
-                    <form method="post">
-                        <span class="text-danger" id="user_privilege_status">You are not allowed to borrow books. Please see a library staff member for assistance</span>
-                        <input id="label_name" type="text" class="form-control-plaintext" value="Name" readonly />
-                        <input id="user_name"  type="text" class="form-control" placeholder="Test1" readonly/>
-                        <input id="label_studentID" type="text" class="form-control-plaintext" value="Student ID" readonly />
-                        <input id="user_studentID" type="text" class="form-control" placeholder="12345" readonly/>
-                        <input id="label_email" type="text" class="form-control-plaintext" value="Email" readonly />
-                        <input id="user_email" type="text" class="form-control" placeholder="Test1@mymail.sim.sg" readonly/>
-                        <button id="back_home" class="btn btn-primary text-center bg-primary" type="button" style="margin-top: 10px;height: 40px;">Home</button>
-                        </form>
+                    <div>{% if blacklisted %}<span class="text-danger" id="user_privilege_status"><br />You are not allowed to borrow books. Please see a library staff member for assistance<br /><br /></span>{% endif %}</div>
+                    <form method="post"><input type="text" class="form-control-plaintext" id="label_name" value="Name" readonly /><input type="text" class="form-control" id="user_name" value="{{user.libraryuser.fullname}}" readonly /><input type="text" class="form-control-plaintext" id="label_studentID" value="Student ID" readonly /><input type="text" class="form-control" id="user_studentID" value="{{user.get_username}}" readonly /><input type="text" class="form-control-plaintext" id="label_email" value="Email" readonly /><input type="text" class="form-control" id="user_email" value="email@mymail.sim.sg" readonly /><button class="btn btn-primary text-center bg-primary" id="back_home" type="button" style="margin-top: 10px;height: 40px;">Home</button></form>
                 </div>
             </div>
         </div>

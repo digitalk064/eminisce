@@ -59,12 +59,13 @@ class LibraryUserForm(ModelForm):
         widgets = {
             'fingerprint': BinaryFileInput(),
         }
+        help_texts = {
+            'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
+        }
 
 class LibraryUserEditForm(ModelForm):
 
     idnum = forms.CharField(label="Identification Number", help_text="Can be Student ID or Employee ID, used for logging in.")
-    fingerprint = forms.FileField(widget=BinaryFileInput(), 
-    required=False, help_text="Upload fingerprint file generated from the fingerprint reader.")
 
     class Meta:
         model = LibraryUser
@@ -72,6 +73,9 @@ class LibraryUserEditForm(ModelForm):
         exclude = ['user']
         widgets = {
             'fingerprint': BinaryFileInput(),
+        }
+        help_texts = {
+            'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
         }
 
 class LoanForm(ModelForm):
@@ -104,3 +108,20 @@ class LoanForm(ModelForm):
         model = Loan
         fields = "__all__"
         exclude = ['status', 'return_date']
+
+class LoanEditForm(ModelForm):
+
+    due_date = forms.DateTimeField(widget=DateTimePickerInput(
+            format='%d/%m/%Y %H:%M',
+            attrs={'width':'50%',},
+            options= {
+                'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
+            }
+        ), 
+        help_text = "The new due date of the loan.", label = "New due date", 
+        input_formats=("%d/%m/%Y %H:%M",),
+    )
+
+    class Meta:
+        model = Loan
+        fields = ('due_date',)

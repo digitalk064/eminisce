@@ -22,6 +22,6 @@ import requests
 def index(request):
     context = {"home_active" : "active"} #change navbar active element
 
-    context["user"] = request.user.libraryuser
+    context['blacklisted'] = True if request.user.libraryuser.status == LibraryUser.Status.CANNOTBORROW else False
 
     return render(request, "user/profile.html", context)
