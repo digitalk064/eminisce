@@ -23,7 +23,7 @@ class LibraryUser(models.Model):
     fullname = models.CharField(max_length=100, help_text="Full name of the library user.", verbose_name = "Full name")
     status = models.CharField(max_length = 30, choices= Status.choices, default = Status.CANBORROW)
     user_type = models.CharField(max_length = 30, choices= UserType.choices, default = UserType.STUDENT)
-    fingerprint = models.BinaryField(blank=True)
+    fingerprint = models.BinaryField(blank=True, editable=True)
 
     def __str__(self):
         return self.user.username + " " + self.fullname

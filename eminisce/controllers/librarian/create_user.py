@@ -29,7 +29,7 @@ def create_user(request):
     #Handle submitting form
     if request.method == "POST":
         #Get the submitted form
-        form = LibraryUserForm(request.POST)
+        form = LibraryUserForm(request.POST, request.FILES)
         #Check if valid first
         if form.is_valid():
             #Get the ID

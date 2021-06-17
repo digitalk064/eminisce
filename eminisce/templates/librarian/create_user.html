@@ -8,7 +8,7 @@
     <h3>Create a new library user acccount</h3>
     <div class="jumbotron" style="padding-top: 32px;">
         <div>{% if form %}
-            <form method="POST" id="create_user_form" name="create_user">
+            <form method="POST" id="create_user_form" name="create_user" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
                 {{ form.media }}

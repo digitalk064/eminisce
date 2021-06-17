@@ -25,7 +25,7 @@ def edit_user(request, edit_id):
     #Handle submitting form
     if request.method == "POST":
         #Get the submitted form
-        form = LibraryUserEditForm(request.POST, instance=libraryuser)
+        form = LibraryUserEditForm(request.POST, request.FILES, instance=libraryuser)
         #Check if valid first
         if form.is_valid():
             #Get the ID

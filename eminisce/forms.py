@@ -23,6 +23,30 @@ class BookForm(ModelForm):
 
 #AuthorFormSet = inlineformset_factory(Author, Book, form=AuthorForm, can_delete=False)
 
+class BinaryFileInput(forms.ClearableFileInput):
+
+    def is_initial(self, value):
+        """
+        Return whether value is considered to be initial value.
+        """
+        return bool(value)
+
+    def format_value(self, value):
+        """Format the size of the value in the db.
+
+        We can't render it's name or url, but we'd like to give some information
+        as to wether this file is not empty/corrupt.
+        """
+        if self.is_initial(value):
+            return f'{len(value)} bytes'
+
+
+    def value_from_datadict(self, data, files, name):
+        """Return the file contents so they can be put in the db."""
+        upload = super().value_from_datadict(data, files, name)
+        if upload:
+            return upload.read()
+
 class LibraryUserForm(ModelForm):
 
     idnum = forms.CharField(label="Identification Number", help_text="Can be Student ID or Employee ID, used for logging in.")
@@ -30,19 +54,25 @@ class LibraryUserForm(ModelForm):
 
     class Meta:
         model = LibraryUser
-        fields = ['idnum', 'password', 'fullname', 'user_type']
+        fields = ['idnum', 'password', 'fullname', 'user_type', 'fingerprint']
         exclude = ['status', 'user']
+        widgets = {
+            'fingerprint': BinaryFileInput(),
+        }
 
 class LibraryUserEditForm(ModelForm):
 
     idnum = forms.CharField(label="Identification Number", help_text="Can be Student ID or Employee ID, used for logging in.")
-    fingerprint_upload = forms.FileField(widget=forms.FileInput(attrs={'accept': '.bmp, .jpg'}), 
+    fingerprint = forms.FileField(widget=BinaryFileInput(), 
     required=False, help_text="Upload fingerprint file generated from the fingerprint reader.")
 
     class Meta:
         model = LibraryUser
-        fields = ['idnum', 'fullname', 'user_type', 'status', 'fingerprint_upload']
+        fields = ['idnum', 'fullname', 'user_type', 'status', 'fingerprint']
         exclude = ['user']
+        widgets = {
+            'fingerprint': BinaryFileInput(),
+        }
 
 class LoanForm(ModelForm):
 

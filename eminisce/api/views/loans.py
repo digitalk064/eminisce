@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from eminisce.models.loans import Loan
 from eminisce.models.book import Book
+from eminisce.models.libraryuser import LibraryUser
 from eminisce.api.serializers import CreateLoanSerializer, LoanStatusSerializer
 
 
@@ -22,10 +23,14 @@ def new_loan(request):
             # Check if book is available
             if serializer.validated_data['book'].status != Book.Status.AVAILABLE:
                 return Response(data={"error": "Book is currently unavailable"}, status=status.HTTP_400_BAD_REQUEST)
+            # Check if the user can borrow books
+            elif serializer.validated_data['borrower'].status != LibraryUser.Status.CANBORROW:
+                return Response(data={"error": "User is currently not allowed to borrow books"}, status=status.HTTP_400_BAD_REQUEST)
             else:
-                #Save
+                # Success, create new loan and send success
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # POST data invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)

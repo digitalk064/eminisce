@@ -8,7 +8,7 @@
     <h3>Editing {{user_fullname}}</h3>
     <div class="jumbotron" style="padding-top: 32px;">
         <div>{% if form %}
-            <form method="POST" id="edit_user_form" name="edit_user">
+            <form method="POST" id="edit_user_form" name="edit_user" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
                 {{ form.media }}
