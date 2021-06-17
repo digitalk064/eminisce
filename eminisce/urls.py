@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 import eminisce.controllers.common
-from eminisce.controllers.user import browse_catalog, view_book
+from eminisce.controllers.user import browse_catalog, view_book, profile
 from eminisce.controllers.librarian import create_user, user_management, delete_user, edit_user
 from eminisce.controllers.librarian import book_management, create_book, delete_book, edit_book
 from eminisce.controllers.librarian import loan_management, create_loan, mark_loan_returned
@@ -40,8 +40,10 @@ urlpatterns = [
     # User places
     path("browse/", browse_catalog.browse, name = "browse_catalog"),
 
+    path("profile/", profile.index, name = "user_profile"),
+
     # View book description
-    path("browse/view_book/<int:book_id>",  view_book.view_book, name = "view_book_desc"),
+    path("browse/view_book/<str:barcode>",  view_book.view_book, name = "view_book_desc"),
 
     # Librarian places
     # User Management

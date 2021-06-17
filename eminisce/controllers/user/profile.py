@@ -14,18 +14,14 @@ from django.utils import timezone as timmy #Avoid naming conflict
 from pytz import timezone
 from django.conf import settings
 
-from .user import user_index
+from eminisce.models.loans import LibraryUser
 
 import requests
 
 @login_required
 def index(request):
-    #If user is staff, take user to admin page right away
-    if request.user.is_staff:
-        context = {"home_active" : "active"} #change navbar active element
+    context = {"home_active" : "active"} #change navbar active element
 
-        return render(request, "librarian/index.html", context)
-    
-    else:
+    context["user"] = request.user.libraryuser
 
-        return user_index.index(request)
+    return render(request, "user/profile.html", context)
