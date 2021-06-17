@@ -19,7 +19,7 @@ class LibraryUserTable(tables.Table):
         model = LibraryUser
         template_name = "django_tables2/bootstrap4.html"
         attrs = {"class": "table table-hover"}
-        exclude = ('id', "status", 'fingerprint')
+        exclude = ("status", 'fingerprint')
 
 
 class BookTable(tables.Table):
@@ -31,7 +31,7 @@ class BookTable(tables.Table):
         template_name = "django_tables2/bootstrap4.html"
         attrs = {"class": "table table-hover"}
         sequence = ("coverimg", "...")
-        exclude = ('cover', 'description', )
+        exclude = ('id', 'cover', 'description', )
 
 class LoanTable(tables.Table):
     status = tables.Column(verbose_name="Status", accessor="short_status", order_by="status")

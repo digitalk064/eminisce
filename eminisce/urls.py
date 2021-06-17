@@ -23,7 +23,7 @@ import eminisce.controllers.common
 from eminisce.controllers.user import browse_catalog, view_book, profile
 from eminisce.controllers.librarian import create_user, user_management, delete_user, edit_user
 from eminisce.controllers.librarian import book_management, create_book, delete_book, edit_book
-from eminisce.controllers.librarian import loan_management, create_loan, mark_loan_returned
+from eminisce.controllers.librarian import loan_management, create_loan, mark_loan_returned, edit_loan
 
 urlpatterns = [
     # Admin places
@@ -63,6 +63,7 @@ urlpatterns = [
     path("librarian/loans", loan_management.index, name = "librarian_manage_loan"),
     path("librarian/createloan", create_loan.create_loan, name = "librarian_create_loan"),
     path('librarian/loans/mark_loan_returned/<int:loan_id>', mark_loan_returned.mark_loan_returned, name='mark_loan_returned'),
+    path('librarian/loans/edit_loan/<int:loan_id>', edit_loan.edit_loan, name='edit_loan'),
     #path('librarian/books/delete_book/<int:del_id>', delete_book.delete_book, name='delete_book'),
 
     #REST API

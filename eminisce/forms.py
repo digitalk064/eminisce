@@ -104,3 +104,20 @@ class LoanForm(ModelForm):
         model = Loan
         fields = "__all__"
         exclude = ['status', 'return_date']
+
+class LoanEditForm(ModelForm):
+
+    due_date = forms.DateTimeField(widget=DateTimePickerInput(
+            format='%d/%m/%Y %H:%M',
+            attrs={'width':'50%',},
+            options= {
+                'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
+            }
+        ), 
+        help_text = "The new due date of the loan.", label = "New due date", 
+        input_formats=("%d/%m/%Y %H:%M",),
+    )
+
+    class Meta:
+        model = Loan
+        fields = ('due_date',)
