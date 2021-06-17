@@ -18,7 +18,7 @@ def index(request):
     if request.method == "GET":
         context['keywords'] = request.GET.get('keywords','')
 
-    table = LibraryUserTable(LibraryUser.objects.filter(user__username__icontains=context['keywords']))
+    table = LibraryUserTable(LibraryUser.objects.filter(user__username__icontains=context['keywords']), order_by=('-id'))
     RequestConfig(request, paginate={"per_page": 10}).configure(table)
 
     context['table'] = table

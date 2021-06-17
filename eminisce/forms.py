@@ -59,12 +59,13 @@ class LibraryUserForm(ModelForm):
         widgets = {
             'fingerprint': BinaryFileInput(),
         }
+        help_texts = {
+            'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
+        }
 
 class LibraryUserEditForm(ModelForm):
 
     idnum = forms.CharField(label="Identification Number", help_text="Can be Student ID or Employee ID, used for logging in.")
-    fingerprint = forms.FileField(widget=BinaryFileInput(), 
-    required=False, help_text="Upload fingerprint file generated from the fingerprint reader.")
 
     class Meta:
         model = LibraryUser
@@ -72,6 +73,9 @@ class LibraryUserEditForm(ModelForm):
         exclude = ['user']
         widgets = {
             'fingerprint': BinaryFileInput(),
+        }
+        help_texts = {
+            'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
         }
 
 class LoanForm(ModelForm):
