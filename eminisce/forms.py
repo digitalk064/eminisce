@@ -87,11 +87,11 @@ class LoanForm(ModelForm):
             format='%d/%m/%Y %H:%M',
             attrs={'width':'50%',},
             options= {
-                'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
+                #'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
             }
         ), 
         help_text = "The start date of the loan.", label = "Start Date", 
-        initial=timezone.now(),
+        initial=lambda: datetime.now(),
         input_formats=("%d/%m/%Y %H:%M",),
     )
 
@@ -103,7 +103,7 @@ class LoanForm(ModelForm):
             }
         ), 
         help_text = "The due date of the loan.", label = "Due Date", 
-        initial = timezone.now() + timedelta(days=Loan.DEFAULT_LOAN_DAYS),
+        initial = lambda: datetime.now()+timedelta(days=Loan.DEFAULT_LOAN_DAYS),
         input_formats=("%d/%m/%Y %H:%M",),
     )
 
