@@ -10,9 +10,12 @@ from eminisce.forms import LoanEditForm
 from eminisce.models.loans import Loan
 from django.contrib.auth.models import User
 
+from django.conf import settings
+from django.utils import timezone
+
 @staff_member_required
 def edit_loan(request, loan_id):
-
+    timezone.activate(settings.TIME_ZONE)
     context = {"loans_active" : "active"} #change navbar active element
     try:
         loan = Loan.objects.get(id=loan_id)

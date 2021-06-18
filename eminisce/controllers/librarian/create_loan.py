@@ -22,8 +22,13 @@ import requests
 
 from django.contrib.admin.views.decorators import staff_member_required
 
+from django.conf import settings
+from django.utils import timezone
+
 @staff_member_required
 def create_loan (request):
+    timezone.activate(settings.TIME_ZONE)
+
     context = {"loans_active" : "active"} #change navbar active element
 
     #Handle submitting form

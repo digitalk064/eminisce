@@ -10,6 +10,9 @@ from bootstrap_datepicker_plus import DateTimePickerInput
 
 from datetime import datetime,timedelta,time
 from django.utils import timezone
+from django.conf import settings
+
+timezone.activate(settings.TIME_ZONE)
 
 class AuthorForm(ModelForm):
     class Meta:
