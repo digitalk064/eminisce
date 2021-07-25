@@ -161,9 +161,9 @@
                                 {% for fine in past_fines %}
                                 <li class="list-group-item" id="fines_list_item">
                                     <div class="d-flex d-xl-flex justify-content-start justify-content-xl-start" id="fines_list_item_fine_info"><img class="d-xl-flex justify-content-xl-start" id="loans_list_item_thumbnail" src="{%if loan.book.cover %} {{loan.book.cover.url}} {% else %} /media/icons/icon_book.png {% endif %}" style="max-height: 60px;width: 52px;height: 60px;" />
-                                        <div id="loans_list_item_description" style="padding-left: 0px;margin-left: 25px;"><a href="#">
-                                                <h5 id="loans_list_item_book_title">{{fine.amount}}</h5>
-                                            </a><span id="loans_list_item_book_author" style="padding-left: 0px;"><b>Reason:</b> {{fine.reason}}.<br /></span></div>
+                                        <div id="loans_list_item_description" style="padding-left: 0px;margin-left: 25px;">
+                                                <h5 id="loans_list_item_book_title">${{fine.amount}}</h5>
+                                            <span id="loans_list_item_book_author" style="padding-left: 0px;"><b>Reason:</b> {{fine.reason}}.<br /></span></div>
                                     </div>
                                     <div id="loans_list_item_loan_info" style="margin-top: 10px;"><span id="loans_list_item_borrow_date">Issued on {{fine.issue_date}}<br /></span>
                                         {% if fine.status != "PAID" %}
