@@ -83,7 +83,7 @@ def create_user(request):
 def post_process_img(original):
     # Open image with Pillow
     processed = Image.open(io.BytesIO(original))
-    processed.thumbnail((320, 320), Image.ANTIALIAS)
+    processed.thumbnail((160, 160), Image.ANTIALIAS)
     # Convert to bytes again to save to database
     img_byte_arr = io.BytesIO()
     processed.save(img_byte_arr, format='PNG')
