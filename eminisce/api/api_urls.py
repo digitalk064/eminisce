@@ -7,6 +7,7 @@ from .views import loans
 router = routers.DefaultRouter()
 
 router.register(r'books', viewsets.BookViewSet)
+router.register(r'libraryusersbio', viewsets.LibraryUserBioViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

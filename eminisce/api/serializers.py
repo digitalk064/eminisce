@@ -11,6 +11,17 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = "__all__"
 
+class LibraryUserBioSerializer(serializers.ModelSerializer):
+
+    user = serializers.SlugRelatedField(
+        queryset = User.objects.all(),
+        slug_field="username",
+    )
+
+    class Meta:
+        model = LibraryUser
+        fields = ("user", "fingerprint", "face_front",)
+
 class LibraryUserIDSerializer(serializers.ModelSerializer):
 
     user = serializers.SlugRelatedField(

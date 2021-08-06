@@ -22,12 +22,30 @@ import requests
 
 from django.contrib.admin.views.decorators import staff_member_required
 
+from PIL import Image
+import io
+
 @staff_member_required
 def create_user(request):
     context = {"accounts_active" : "active"} #change navbar active element
 
     #Handle submitting form
     if request.method == "POST":
+
+         # First, if fingerprint or face images were uploaded, we have to process them
+        processed_fingerprint = None
+        processed_face = None
+
+        if not request.FILES.get('fingerprint', None):
+            print("No fingerprint uploaded")
+        else:
+            processed_fingerprint = request.FILES.get('fingerprint').read() # Keep fingerprint file raw
+
+        if not request.FILES.get('face_front', None):
+            print("No face uploaded")
+        else:
+            processed_face = post_process_img(request.FILES.get('face_front').read()) # Resize the image to save storage space
+        
         #Get the submitted form
         form = LibraryUserForm(request.POST, request.FILES)
         #Check if valid first
@@ -44,6 +62,13 @@ def create_user(request):
                 _libraryuser = form.save(commit=False)
                 #Assign the user object to the library user foreign key
                 _libraryuser.user = new_user
+
+                # If fingerprint or face images were uploaded, save the processed files to the database
+                if processed_fingerprint:
+                    _libraryuser.fingerprint = processed_fingerprint
+                if processed_face:
+                    _libraryuser.face_front = processed_face
+
                 #Save it
                 _libraryuser.save()
                 #Alert the user of the success
@@ -54,3 +79,13 @@ def create_user(request):
     context['form'] = form
 
     return render(request, "librarian/create_user.html", context)
+
+def post_process_img(original):
+    # Open image with Pillow
+    processed = Image.open(io.BytesIO(original))
+    processed.thumbnail((320, 320), Image.ANTIALIAS)
+    # Convert to bytes again to save to database
+    img_byte_arr = io.BytesIO()
+    processed.save(img_byte_arr, format='PNG')
+    img_byte_arr = img_byte_arr.getvalue()
+    return img_byte_arr

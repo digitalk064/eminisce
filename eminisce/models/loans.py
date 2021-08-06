@@ -10,10 +10,10 @@ from pytz import timezone
 from .libraryuser import LibraryUser
 from .book import Book
 
-
 class Loan(models.Model):
     
     DEFAULT_LOAN_DAYS = 21
+
 
     class Status(models.TextChoices):
         ACTIVE = 'ACTIVE', _('Loan is currently active.')
@@ -21,11 +21,14 @@ class Loan(models.Model):
         LATE = 'LATE', _('Loan not finished, user is late on returning book.')
         RETURNED_LATE = 'RETURNED LATE', _('Loan finished, but book was returned past due.')
 
+    def due_date_field():
+        datetime.now()+timedelta(days=Loan.DEFAULT_LOAN_DAYS)
+
     borrower = models.ForeignKey(LibraryUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     status = models.CharField(max_length = 20, choices= Status.choices, default = Status.ACTIVE)
     start_date = models.DateTimeField(default=datetime.now, help_text = "The start date of the loan.")
-    due_date = models.DateTimeField(default=lambda: datetime.now()+timedelta(days=Loan.DEFAULT_LOAN_DAYS), help_text = "The due date of the loan.")
+    due_date = models.DateTimeField(default= due_date_field, help_text = "The due date of the loan.")
     return_date = models.DateTimeField(help_text = "The actual date the book was returned and the loan finishes.", null=True)
 
     def __str__(self):

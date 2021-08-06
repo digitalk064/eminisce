@@ -48,7 +48,7 @@ class BinaryFileInput(forms.ClearableFileInput):
         """Return the file contents so they can be put in the db."""
         upload = super().value_from_datadict(data, files, name)
         if upload:
-            return upload.read()
+            return upload#.read()
 
 class LibraryUserForm(ModelForm):
 
@@ -57,28 +57,37 @@ class LibraryUserForm(ModelForm):
 
     class Meta:
         model = LibraryUser
-        fields = ['idnum', 'password', 'fullname', 'user_type', 'fingerprint']
+        fields = ['idnum', 'password', 'fullname', 'user_type', 'fingerprint', 'face_front']
         exclude = ['status', 'user']
         widgets = {
             'fingerprint': BinaryFileInput(),
+            'face_front': BinaryFileInput(attrs={'accept': 'image/*'}),
         }
         help_texts = {
             'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
+            'face_front': '(Optional) Upload front facial photoshot to use with facial recognition.',
         }
 
 class LibraryUserEditForm(ModelForm):
 
     idnum = forms.CharField(label="Identification Number", help_text="Can be Student ID or Employee ID, used for logging in.")
 
+    def __init__(self, *args, **kwargs):
+        super(LibraryUserEditForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            self.face_preview = self.instance.face_image_display()
+
     class Meta:
         model = LibraryUser
-        fields = ['idnum', 'fullname', 'user_type', 'status', 'fingerprint']
+        fields = ['idnum', 'fullname', 'user_type', 'status', 'fingerprint', 'face_front']
         exclude = ['user']
         widgets = {
             'fingerprint': BinaryFileInput(),
+            'face_front': BinaryFileInput(attrs={'accept': 'image/*'}),
         }
         help_texts = {
             'fingerprint': '(Optional) Upload fingerprint file generated from the fingerprint reader.',
+            'face_front': '(Optional) Upload front facial photoshot to use with facial recognition.',
         }
 
 class LoanForm(ModelForm):

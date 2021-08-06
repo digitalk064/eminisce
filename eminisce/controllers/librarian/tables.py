@@ -11,6 +11,7 @@ class LibraryUserTable(tables.Table):
     #idnum = tables.Column(accessor="user__username")
     user_type = tables.Column(accessor="short_user_type", verbose_name="User Type", order_by="user_type")
     has_fingerprint = tables.BooleanColumn(verbose_name="Enrolled Fingerprint?", accessor="has_fingerprint", order_by="fingerprint")
+    has_face = tables.BooleanColumn(verbose_name="Enrolled Face?", accessor="has_face", order_by="face_front")
     can_borrow = tables.BooleanColumn(verbose_name="Can Borrow?", accessor="can_borrow", order_by="status")
     actions = tables.TemplateColumn(orderable=False, template_name='librarian/dynamic/user_row_buttons.html', verbose_name="")
     
@@ -19,7 +20,7 @@ class LibraryUserTable(tables.Table):
         model = LibraryUser
         template_name = "django_tables2/bootstrap4.html"
         attrs = {"class": "table table-hover"}
-        exclude = ("status", 'fingerprint')
+        exclude = ("status", 'fingerprint', 'face_front', 'face_leftside', 'face_rightside')
 
 
 class BookTable(tables.Table):
