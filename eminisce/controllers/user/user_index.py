@@ -43,12 +43,14 @@ def index(request):
     past_loans = list(past_loans)
 
     # Get all the user's active fines
-    outstanding_total = '{0:.2f}'.format(Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.UNPAID))).aggregate(Sum('amount')).get("amount__sum", 0))
+    outstanding_total = Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.UNPAID))).aggregate(Sum('amount')).get("amount__sum", 0)
     if outstanding_total is None:
         outstanding_total = 0
+    else:
+        outstanding_total = '{0:.2f}'.format(outstanding_total)
 
     # Get all the user's past fines
-    past_fines = Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.PAID))).order_by("-paid_date")
+    past_fines = Fine.objects.filter(borrower=request.user.libraryuser).order_by("-issue_date")
     past_fines = list(past_fines)
 
     context["loans"] = loans

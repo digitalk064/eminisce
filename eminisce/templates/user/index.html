@@ -11,7 +11,7 @@
         <div class="input-group">
             <div class="input-group-prepend"><span class="input-group-text"><svg width="100%" viewBox="0 0 24 24" style="transform: scale(1,1);" height="24px" id="magnifying-glass">
                         <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></path>
-                    </svg></span></div><input type="text" class="form-control" id="keywords" placeholder="Search the library" name="keywords" />
+                    </svg></span></div><input class="form-control" type="text" id="keywords" placeholder="Search the library" name="keywords" />
             <div class="input-group-append"><button class="btn btn-primary" type="button">Search </button></div>
         </div>
     </form>
@@ -126,8 +126,8 @@
                     <h4>FINES</h4>
                     <p>Here you can view your outstanding fines. You can choose to pay them online here or pay by cash at the librarian&#39;s desk.</p>
                     <h4 id="current_fines_total">OUTSTANDING: ${{fines_outstanding_amount}}</h4>
-                    <div id="payment_options"><button class="btn btn-outline-primary current_fines_pay_button" type="button" style="margin-right: 20px;">PayPal</button><button class="btn btn-outline-primary current_fines_pay_button" type="button" style="margin-right: 20px;">PayLah</button><button class="btn btn-outline-primary current_fines_pay_button" type="button" style="margin-right: 20px;">eNETS</button><button class="btn btn-outline-primary current_fines_pay_button" type="button" style="margin-right: 20px;">Credit / Debit Card</button></div>
-                    <div id="fines_history" style="margin-top: 20px;"><a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button">View Past Fines</a>
+                    <div id="payment_options"><a class="btn btn-outline-primary current_fines_pay_button" role="button" style="margin-right: 20px;" href="/pay_fines">PayPal</a><a class="btn btn-outline-primary current_fines_pay_button" role="button" style="margin-right: 20px;" href="/pay_fines">PayLah</a><a class="btn btn-outline-primary current_fines_pay_button" role="button" style="margin-right: 20px;" href="/pay_fines">eNETS</a><a class="btn btn-outline-primary current_fines_pay_button" role="button" style="margin-right: 20px;" href="/pay_fines">Credit / Debit Card</a></div>
+                    <div id="fines_history" style="margin-top: 20px;"><a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button">View Fines</a>
                         <div class="collapse" id="collapse-2">
                             <ul class="list-group" id="fines_history_list">
                                 <li class="list-group-item" id="fines_list_item" style="display: none;">
@@ -150,7 +150,13 @@
                                                 <h5 id="loans_list_item_book_title">{{fine.amount}}</h5>
                                             </a><span id="loans_list_item_book_author" style="padding-left: 0px;"><b>Reason:</b> {{fine.reason}}.<br /></span></div>
                                     </div>
-                                    <div id="loans_list_item_loan_info" style="margin-top: 10px;"><span id="loans_list_item_borrow_date">Issued on {{fine.issue_date}}<br /></span><span id="loans_list_item_borrow_date">Paid on {{fine.paid_date}}<br /></span></div>
+                                    <div id="loans_list_item_loan_info" style="margin-top: 10px;"><span id="loans_list_item_borrow_date">Issued on {{fine.issue_date}}<br /></span>
+                                        {% if fine.status != "PAID" %}
+                                        <span id="loans_list_item_borrow_date" class="text-danger">Unpaid.<br /></span>
+                                        {% else %}
+                                        <span id="loans_list_item_borrow_date">Paid on {{fine.paid_date}}<br /></span>
+                                        {% endif %}
+                                    </div>
                                 </li>
                                 {% endfor %}
                             </ul>
