@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_tables2",
     'rest_framework',
     'rest_framework.authtoken',
+    'django_crontab',
     'eminisce',
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -152,3 +153,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+CRONJOBS = [
+    ('* * * * *', 'eminisce.tasks.auto_update_loans')
+]
