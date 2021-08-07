@@ -7,7 +7,10 @@ class EminisceAppConfig(AppConfig):
     name = 'eminisce'
     verbose_name = "Eminisce"
     def ready(self):
-        if True: #if 'runserver' not in sys.argv and 'makemigrations' not in sys.argv and 'migrate' not in sys.argv: # Don't run on local because Windows does not have cron
+        # This is a really bad idea because I'm too lazy to install cron on heroku
+        # We need a lot of checks to prevent this from being stuck in a loop since manage.py will call ready every time
+        # Don't run on local because Windows does not have cron
+        if 'runserver' not in sys.argv and 'makemigrations' not in sys.argv and 'migrate' not in sys.argv and 'crontab' not in sys.argv: 
             print("Starting crontab jobs")
             #subprocess.Popen([sys.executable, os.getcwd() + '/eminisce/start_background_tasks.py'], env=os.environ.copy(),)
             process_tasks_cmd = "python manage.py crontab add"
