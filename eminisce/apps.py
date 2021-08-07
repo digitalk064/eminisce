@@ -19,7 +19,7 @@ class EminisceAppConfig(AppConfig):
 
         # UPDATE: Good news, background_tasks actually works here!
         print(sys.argv)
-        if 'makemigrations' not in sys.argv and 'migrate' not in sys.argv and 'process_tasks' not in sys.argv: 
+        if 'collectstatic' not in sys.argv and 'makemigrations' not in sys.argv and 'migrate' not in sys.argv and 'process_tasks' not in sys.argv: 
             print("Starting background tasks")
             from eminisce.tasks import auto_update_loans
             print("Executing 'auto updating loans status' task")
