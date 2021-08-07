@@ -101,7 +101,7 @@ class LoanForm(ModelForm):
             }
         ), 
         help_text = "The start date of the loan.", label = "Start Date", 
-        initial=lambda: datetime.now(),
+        initial=lambda: datetime.now(), # Interesting bug: Local development will still show local PC's date but Heroku shows correct date...
         input_formats=("%d/%m/%Y %H:%M",),
     )
 

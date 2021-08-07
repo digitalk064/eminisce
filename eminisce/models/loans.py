@@ -10,6 +10,10 @@ from pytz import timezone
 from .libraryuser import LibraryUser
 from .book import Book
 
+from django.conf import settings
+
+timmy.activate(settings.TIME_ZONE)
+
 class Loan(models.Model):
     
     DEFAULT_LOAN_DAYS = 21
@@ -38,6 +42,11 @@ class Loan(models.Model):
     def short_status(self):
         return self.status
 
+    def update_late_status(self):
+        if(timmy.localtime(timmy.now()) > self.due_date):
+            self.status = self.Status.LATE
+            self.save()
+
     def set_returned(self):
         # Assign return date
         self.return_date = timmy.now()
@@ -54,10 +63,10 @@ class Loan(models.Model):
         if not self.pk:
             self.book.set_unavailable()
         else:
-            # If the new status is not active (or late), we know it's returned
-            if self.status != self.Status.ACTIVE or self.status != self.Status.LATE:
+            # If the new status is returned, make the book available again and set return_date field
+            if self.status == self.Status.RETURNED or self.status == self.Status.RETURNED_LATE:
                 # Set the book to available again
                 self.book.set_available()
                 # Set the return date
-                self.return_date = timmy.now()
+                # self.return_date = timmy.now()
         return super(Loan, self).save(*args, **kwargs)

@@ -33,7 +33,7 @@ class Fine(models.Model):
         return self.status
 
     def set_paid(self):
-        # Assign return date
+        # Assign paid date
         self.paid_date = timmy.now()
         self.status = self.Status.PAID
         self.save()

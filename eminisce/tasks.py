@@ -1,8 +1,14 @@
+from background_task import background
+
 from eminisce.models.loans import Loan
 from django.utils import timezone as timmy
+from django.conf import settings
 
+timmy.activate(settings.TIME_ZONE)
+
+@background(schedule=0)
 def auto_update_loans():
-    print("Hello")
-    loan = Loan.objects.last()
-    loan.return_date = timmy.now()
-    loan.save()
+    print("Executing 'auto updating loans status' task")
+    loans= Loan.objects.filter(status=Loan.Status.ACTIVE)
+    for loan in loans:
+        loan.update_late_status()

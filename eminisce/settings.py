@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_crontab',
+    'background_task',
     'eminisce',
     'django_cleanup.apps.CleanupConfig',
 ]
