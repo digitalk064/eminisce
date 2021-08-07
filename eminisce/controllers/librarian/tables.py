@@ -4,6 +4,7 @@ from django_tables2.utils import A
 from eminisce.models.libraryuser import LibraryUser
 from eminisce.models.book import Book
 from eminisce.models.loans import Loan
+from eminisce.models.fines import Fine
 
 
 class LibraryUserTable(tables.Table):
@@ -45,3 +46,13 @@ class LoanTable(tables.Table):
         attrs = {"class": "table table-hover"}
         exclude = ('id', )
 
+class FineTable(tables.Table):
+    status = tables.Column(verbose_name="Status", accessor="short_status", order_by="status")
+    actions = tables.TemplateColumn(orderable=False, template_name='librarian/dynamic/fine_row_buttons.html', verbose_name="")
+    #coverimg = tables.TemplateColumn('<img src="/media/{{record.cover}}" style="max-height:70px"', verbose_name="", orderable=False)
+
+    class Meta:
+        model = Fine
+        template_name = "django_tables2/bootstrap4.html"
+        attrs = {"class": "table table-hover"}
+        exclude = ('id', )

@@ -4,6 +4,7 @@ from django.forms import inlineformset_factory
 from .models.book import Book, Author, BookBarcode
 from .models.libraryuser import LibraryUser
 from .models.loans import Loan
+from .models.fines import Fine
 
 from django import forms
 from bootstrap_datepicker_plus import DateTimePickerInput
@@ -137,3 +138,43 @@ class LoanEditForm(ModelForm):
     class Meta:
         model = Loan
         fields = ('due_date',)
+
+class FineForm(ModelForm):
+
+    issue_date = forms.DateTimeField(widget=DateTimePickerInput(
+            format='%d/%m/%Y %H:%M',
+            attrs={'width':'50%',},
+            options= {
+                #'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
+            }
+        ), 
+        help_text = "The issue date of the fine.", label = "Issue Date", 
+        initial=lambda: datetime.now(),
+        input_formats=("%d/%m/%Y %H:%M",),
+    )
+
+    class Meta:
+        model = Fine
+        fields = "__all__"
+        exclude = ['status', 'paid_date']
+
+class FineEditForm(ModelForm):
+    issue_date = forms.DateTimeField(widget=DateTimePickerInput(
+            format='%d/%m/%Y %H:%M',
+            attrs={'width':'50%',},
+            options= {
+                #'minDate': datetime.today().strftime('%Y-%m-%d 00:00:00'),
+            }
+        ), 
+        help_text = "The issue date of the fine.", label = "Issue Date", 
+        input_formats=("%d/%m/%Y %H:%M",),
+    )
+
+    class Meta:
+        model = Fine
+        fields = "__all__"
+        exclude = ['status', 'paid_date']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["borrower"].disabled = True

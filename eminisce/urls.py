@@ -24,6 +24,7 @@ from eminisce.controllers.user import browse_catalog, view_book, profile
 from eminisce.controllers.librarian import create_user, user_management, delete_user, edit_user
 from eminisce.controllers.librarian import book_management, create_book, delete_book, edit_book
 from eminisce.controllers.librarian import loan_management, create_loan, mark_loan_returned, edit_loan
+from eminisce.controllers.librarian import fine_management, create_fine, mark_fine_paid, edit_fine
 
 urlpatterns = [
     # Admin places
@@ -65,6 +66,12 @@ urlpatterns = [
     path('librarian/loans/mark_loan_returned/<int:loan_id>', mark_loan_returned.mark_loan_returned, name='mark_loan_returned'),
     path('librarian/loans/edit_loan/<int:loan_id>', edit_loan.edit_loan, name='edit_loan'),
     #path('librarian/books/delete_book/<int:del_id>', delete_book.delete_book, name='delete_book'),
+
+    # Fine Management
+    path("librarian/fines", fine_management.index, name = "librarian_manage_fine"),
+    path("librarian/createfine", create_fine.create_fine, name = "librarian_create_fine"),
+    path('librarian/fines/mark_fine_paid/<int:fine_id>', mark_fine_paid.mark_fine_paid, name='mark_fine_paid'),
+    path('librarian/fines/edit_fine/<int:fine_id>', edit_fine.edit_fine, name='edit_fine'),
 
     #REST API
     path('api/', include('eminisce.api.api_urls')),

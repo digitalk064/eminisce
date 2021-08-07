@@ -1,0 +1,4 @@
+{% if record.status != "PAID" %}
+<a class="btn btn-outline-primary" role="button" href="{% url 'mark_fine_paid' record.pk %}">Mark as paid</a><br>
+<a class="btn btn-outline-primary" role="button" href="{% url 'edit_fine' record.pk %}">Edit</a>
+{% endif %}

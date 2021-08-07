@@ -16,6 +16,9 @@ from django.conf import settings
 
 from eminisce.models.loans import Loan
 from eminisce.models.book import Book
+from eminisce.models.fines import Fine
+
+from django.db.models import Sum
 
 import requests
 
@@ -33,14 +36,24 @@ def index(request):
             loan.overdue = True
             loan.due_in = abs(loan.due_in)
             loan.extend_button_status = "disabled"
+    loans = list(loans)
 
     # Get all the user's past loans
     past_loans = Loan.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Loan.Status.RETURNED) | Q(status = Loan.Status.RETURNED_LATE))).order_by("-return_date")
     past_loans = list(past_loans)
 
-    loans = list(loans)
+    # Get all the user's active fines
+    outstanding_total = '{0:.2f}'.format(Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.UNPAID))).aggregate(Sum('amount')).get("amount__sum", 0))
+    if outstanding_total is None:
+        outstanding_total = 0
+
+    # Get all the user's past fines
+    past_fines = Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.PAID))).order_by("-paid_date")
+    past_fines = list(past_fines)
+
     context["loans"] = loans
     context["past_loans"] = past_loans
-
+    context["fines_outstanding_amount"] = outstanding_total
+    context["past_fines"] = past_fines
 
     return render(request, "user/index.html", context)
