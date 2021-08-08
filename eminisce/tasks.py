@@ -12,3 +12,9 @@ def auto_update_loans():
     loans= Loan.objects.filter(status=Loan.Status.ACTIVE)
     for loan in loans:
         loan.update_late_status()
+
+@background(schedule=0)
+def cleanup_completed_tasks_db():
+    from background_task.models import CompletedTask
+    print("Cleanup CompletedTask objects")
+    CompletedTask.objects.all().delete()
