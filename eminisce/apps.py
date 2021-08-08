@@ -43,9 +43,11 @@ class EminisceAppConfig(AppConfig):
                 if startTasks:
                     print("Starting background tasks")
                     from eminisce.tasks import auto_update_statuses, cleanup_completed_tasks_db
+                    from background_task.models import Task
+                    Task.objects.all().delete() #Clean the tasks database 
                     print("Executing 'auto updating loans status' task")
-                    auto_update_statuses(repeat=1) # Repeat every second because why not
-                    cleanup_completed_tasks_db(repeat=60) # For some reason this stupid plugin clutters up the database so we need to cleanup continuously
+                    auto_update_statuses(repeat=300) # Repeat every 5 minutes because heroku can't take it
+                    cleanup_completed_tasks_db(repeat=300) # For some reason this stupid plugin clutters up the database so we need to cleanup continuously
                     subprocess.Popen([sys.executable, 'manage.py', 'process_tasks'], env=os.environ.copy(),)
 
     # HEROKU/GUNICORN ONLY =================================================================================
