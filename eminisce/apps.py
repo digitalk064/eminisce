@@ -42,9 +42,9 @@ class EminisceAppConfig(AppConfig):
                 
                 if startTasks:
                     print("Starting background tasks")
-                    from eminisce.tasks import auto_update_loans, cleanup_completed_tasks_db
+                    from eminisce.tasks import auto_update_statuses, cleanup_completed_tasks_db
                     print("Executing 'auto updating loans status' task")
-                    auto_update_loans(repeat=1) # Repeat every second because why not
+                    auto_update_statuses(repeat=1) # Repeat every second because why not
                     cleanup_completed_tasks_db(repeat=60) # For some reason this stupid plugin clutters up the database so we need to cleanup continuously
                     subprocess.Popen([sys.executable, 'manage.py', 'process_tasks'], env=os.environ.copy(),)
 

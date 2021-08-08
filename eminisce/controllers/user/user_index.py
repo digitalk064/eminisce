@@ -17,6 +17,7 @@ from django.conf import settings
 from eminisce.models.loans import Loan
 from eminisce.models.book import Book
 from eminisce.models.fines import Fine
+from eminisce.models.reservation import Reservation
 
 from django.db.models import Sum
 
@@ -53,9 +54,14 @@ def index(request):
     past_fines = Fine.objects.filter(borrower=request.user.libraryuser).order_by("-issue_date")
     past_fines = list(past_fines)
 
+     # Get all the user's active reservations
+    reservations = Reservation.objects.filter(Q(borrower=request.user.libraryuser) & Q(status=Reservation.Status.ACTIVE)).order_by("pickup_date")
+    reservations = list(reservations)
+    
     context["loans"] = loans
     context["past_loans"] = past_loans
     context["fines_outstanding_amount"] = outstanding_total
     context["past_fines"] = past_fines
+    context["reservations"] = reservations
 
     return render(request, "user/index.html", context)

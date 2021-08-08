@@ -117,10 +117,14 @@
         <hr />
         <div id="book_reserve_action">
             <div>{% if not available %}</div>
+            <form id="reserve_form" action="/reserve_book/" method="POST" enctype="multipart/form-data" style="display: none;">
+                {% csrf_token %}
+                <input type="text" id="barcode" name="barcode" value="{{book.barcode}}" /><br />
+            </form>
             <h3 id="reserve">Reserve It Now</h3><select id="select_book_barcode" style="background-color: #8f8f8f;color: #ffffff;border-radius: 6px;height: 40px;width: 300px;">
                 <option value="Choose" selected>Choose the available book to reserve</option>
                 <option value="B134367">B134367</option>
-            </select><button class="btn btn-primary bg-success" id="submit" data-toggle="modal" data-target="#submit_modal" style="margin-left: 30px;margin-bottom: 5px;height: 40px;border-radius: 6px;">Submit</button>
+            </select><button class="btn btn-primary bg-success" id="submit" style="margin-left: 30px;margin-bottom: 5px;height: 40px;border-radius: 6px;" type="submit" form="reserve_form">Submit</button>
             <div role="dialog" tabindex="-1" class="modal fade" id="submit_modal" aria-labelledby="modal_title" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

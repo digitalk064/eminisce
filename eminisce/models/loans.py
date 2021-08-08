@@ -36,7 +36,7 @@ class Loan(models.Model):
     return_date = models.DateTimeField(help_text = "The actual date the book was returned and the loan finishes.", null=True)
 
     def __str__(self):
-        return "Borrower: " + self.borrower + " book: " + self.book
+        return f"Borrower: {self.borrower} book: {self.book}"
 
     @property
     def short_status(self):

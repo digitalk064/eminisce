@@ -156,5 +156,5 @@ REST_FRAMEWORK = {
 }
 
 CRONJOBS = [
-    ('* * * * *', 'eminisce.tasks.auto_update_loans')
+    ('* * * * *', 'eminisce.tasks.auto_update_statuses')
 ]
