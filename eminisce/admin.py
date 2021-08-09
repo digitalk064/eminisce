@@ -13,3 +13,7 @@ class BookAdmin(admin.ModelAdmin):
     exclude = ('created_by','status')
     search_fields = ('name','location')
     list_filter = ('status',)
+
+admin.site.site_header = "Eminisce Admin Page"
+admin.site.index_title = "Eminisce Library System"
+admin.site.site_title = "Admin System"
