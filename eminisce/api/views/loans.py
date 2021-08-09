@@ -9,6 +9,8 @@ from eminisce.models.book import Book
 from eminisce.models.libraryuser import LibraryUser
 from eminisce.api.serializers import CreateLoanSerializer, LoanStatusSerializer
 
+from django.forms.models import model_to_dict
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -20,6 +22,7 @@ def new_loan(request):
     if request.method == 'POST':
         serializer = CreateLoanSerializer(data=request.data)
         if serializer.is_valid():
+            #print(serializer.validated_data)
             # Check if book is available
             if serializer.validated_data['book'].status != Book.Status.AVAILABLE:
                 return Response(data={"error": "Book is currently unavailable"}, status=status.HTTP_400_BAD_REQUEST)
@@ -28,8 +31,9 @@ def new_loan(request):
                 return Response(data={"error": "User is currently not allowed to borrow books"}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 # Success, create new loan and send success
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                # serializer.save() This single line took until a few days before the deadline to figure out :)
+                loan = model_to_dict(serializer.save())
+                return Response(loan, status=status.HTTP_201_CREATED)
         # POST data invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:

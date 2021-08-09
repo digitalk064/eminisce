@@ -62,6 +62,10 @@ class Loan(models.Model):
         # If this is a newly created loan, we expect the book to be unavailable
         if not self.pk:
             self.book.set_unavailable()
+            # Check if due date is set, if it is not it is most likely an API call to new_loan, in that case set the due_date ourselves
+            if self.due_date is None:
+                # self.due_date = self.due_date_field() WHY DOESN'T THIS WORK?!?!?
+                self.due_date = datetime.now()+timedelta(days=Loan.DEFAULT_LOAN_DAYS)
         else:
             # If the new status is returned, make the book available again and set return_date field
             if self.status == self.Status.RETURNED or self.status == self.Status.RETURNED_LATE:

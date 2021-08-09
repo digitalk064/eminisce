@@ -41,7 +41,7 @@ class LoanStatusSerializer(serializers.ModelSerializer):
 class CreateLoanSerializer(serializers.ModelSerializer):
     borrower = serializers.SlugRelatedField(
         queryset = LibraryUser.objects.all(),
-        slug_field='user',
+        slug_field='user__username',
     )
 
     book = serializers.SlugRelatedField(
