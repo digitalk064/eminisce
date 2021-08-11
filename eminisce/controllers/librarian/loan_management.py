@@ -20,8 +20,11 @@ def index(request):
 
     if request.method == "GET":
         context['keywords'] = request.GET.get('keywords','')
+        context['filter'] = request.GET.get('filter','')
+    
+    loans = Loan.objects.filter(Q(borrower__fullname__icontains=context['keywords']) | Q(book__barcode__icontains=context['keywords'])).filter(status__icontains=context['filter'])
 
-    table = LoanTable(Loan.objects.filter(Q(borrower__fullname__icontains=context['keywords']) | Q(book__barcode__icontains=context['keywords'])), order_by="-start_date")
+    table = LoanTable(loans, order_by="-start_date")
     RequestConfig(request, paginate={"per_page": 10}).configure(table)
 
     context['table'] = table
