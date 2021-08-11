@@ -34,6 +34,7 @@ class Loan(models.Model):
     start_date = models.DateTimeField(default=datetime.now, help_text = "The start date of the loan.")
     due_date = models.DateTimeField(default= due_date_field, help_text = "The due date of the loan.")
     return_date = models.DateTimeField(help_text = "The actual date the book was returned and the loan finishes.", null=True)
+    extended = models.BooleanField(help_text = "Has the borrower requested to extend the due date?", default = False)
 
     def __str__(self):
         return f"Borrower: {self.borrower} book: {self.book}"
@@ -57,6 +58,12 @@ class Loan(models.Model):
             self.status = self.Status.RETURNED_LATE
             # Do something?
         self.save()
+
+    def extend_duedate(self):
+        if not self.extended:
+            self.due_date = self.due_date + timedelta(days=7)
+            self.extended = True
+            self.save()
 
     def save(self, *args, **kwargs):
         # If this is a newly created loan, we expect the book to be unavailable

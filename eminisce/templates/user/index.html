@@ -44,7 +44,7 @@
                                 <span id="loans_list_item_due">Due in <strong>{{loan.due_in}} days</strong></span><br />
                                 {% endif %}
                                 <span id="loans_list_item_borrow_date">Borrowed on {{loan.start_date}}<br /></span><span id="loans_list_item_return_date">Please return by {{loan.due_date}}<br /></span>
-                            </div><a class="btn btn-outline-secondary {{loan.extend_button_status}}" role="button" data-toggle="tooltip" style="margin-top: 15px;" title="You can request a maximum of 7 days extension of the due date for this loan.">Extend due date</a>
+                            </div><a class="btn btn-outline-secondary {{loan.extend_button_status}}" role="button" data-toggle="tooltip" style="margin-top: 15px;" title="You can request a maximum of 7 days extension of the due date for this loan." href = "/extend_duedate/{{loan.id}}">Extend due date</a>
                         </li>
                         {% endfor %}
                     </ul>

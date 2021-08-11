@@ -120,7 +120,7 @@ class LoanForm(ModelForm):
     class Meta:
         model = Loan
         fields = "__all__"
-        exclude = ['status', 'return_date']
+        exclude = ['status', 'return_date', 'extended']
 
 class LoanEditForm(ModelForm):
 

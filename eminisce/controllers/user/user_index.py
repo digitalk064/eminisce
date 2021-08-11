@@ -30,7 +30,7 @@ def index(request):
     # Get all the user's active loans
     loans = Loan.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Loan.Status.ACTIVE) | Q(status = Loan.Status.LATE))).order_by("-start_date")
     for loan in loans:
-        loan.extend_button_status = "disabled" if loan.status != Loan.Status.ACTIVE else ""
+        loan.extend_button_status = "disabled" if (loan.status != Loan.Status.ACTIVE or loan.extended == True) else ""
         loan.due_in = (loan.due_date - timmy.now()).days
         # Check if overdue
         if loan.due_in < 0:
