@@ -7,7 +7,7 @@ from .models.loans import Loan
 from .models.fines import Fine
 
 from django import forms
-from bootstrap_datepicker_plus import DateTimePickerInput
+from bootstrap_datepicker_plus import DateTimePickerInput, DatePickerInput
 
 from datetime import datetime,timedelta,time
 from django.utils import timezone
@@ -138,6 +138,27 @@ class LoanEditForm(ModelForm):
     class Meta:
         model = Loan
         fields = ('due_date',)
+
+class LoanFilterForm(forms.Form):
+    start_date = forms.DateField(widget=DatePickerInput(
+            format='%m/%d/%Y',
+            attrs={'width':'50%', 'form' : 'filter_form',},
+        ), 
+        help_text = "Select a date to view new borrows in that date.", label = "Borrow date", 
+        input_formats=("%m/%d/%Y",),
+        required=False,
+        #initial=datetime.today()
+    )
+    
+    return_date = forms.DateField(widget=DatePickerInput(
+            format='%m/%d/%Y',
+            attrs={'width':'50%', 'form' : 'filter_form',},
+        ), 
+        help_text = "Select a date to view new returns in that date.", label = "Return date", 
+        input_formats=("%m/%d/%Y",),
+        required=False,
+        #initial=datetime.today()
+    )
 
 class FineForm(ModelForm):
 
