@@ -10,7 +10,7 @@
     <a class="btn btn-primary" role="button" href="/librarian/loans?filter=LATE">View Overdue Books</a>
 
     <div>{% if request.user.is_superuser %}</div>
-    <h2>Admin Management</h2><a class="btn btn-primary" role="button" href="/admin/auth/user/">Staff Account Management</a>
+    <h2>Admin Management</h2><a class="btn btn-primary" role="button" href="/admin/auth/user/?is_staff__exact=1">Staff Account Management</a>
     <div>{% endif %}</div>
 </div>
 
