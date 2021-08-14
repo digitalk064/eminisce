@@ -33,7 +33,7 @@ class Reservation(models.Model):
     due_date = models.DateTimeField(help_text = "The due date after which the reservation will be canceled.")
 
     def __str__(self):
-        return "Borrower: " + self.borrower + " book: " + self.book
+        return f"Borrower: {self.borrower}. Book: {self.book}"
 
     @property
     def short_status(self):

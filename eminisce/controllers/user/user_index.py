@@ -30,12 +30,16 @@ def index(request):
     # Get all the user's active loans
     loans = Loan.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Loan.Status.ACTIVE) | Q(status = Loan.Status.LATE))).order_by("-start_date")
     for loan in loans:
+        # Disable extend due date button if the loan is late or the loan has already been extended
         loan.extend_button_status = "disabled" if (loan.status != Loan.Status.ACTIVE or loan.extended == True) else ""
+        # Calculate days until due date
         loan.due_in = (loan.due_date - timmy.now()).days
         # Check if overdue
         if loan.due_in < 0:
             loan.overdue = True
+            # Due in would be negative so get its absolute value
             loan.due_in = abs(loan.due_in)
+            # Disable extend button
             loan.extend_button_status = "disabled"
     loans = list(loans)
 
@@ -43,7 +47,7 @@ def index(request):
     past_loans = Loan.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Loan.Status.RETURNED) | Q(status = Loan.Status.RETURNED_LATE))).order_by("-return_date")
     past_loans = list(past_loans)
 
-    # Get all the user's active fines
+    # Get all the user's active fines and aggregate them to get the outstanding sum
     outstanding_total = Fine.objects.filter(Q(borrower=request.user.libraryuser) & (Q(status=Fine.Status.UNPAID))).aggregate(Sum('amount')).get("amount__sum", 0)
     if outstanding_total is None:
         outstanding_total = 0

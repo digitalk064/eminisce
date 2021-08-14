@@ -37,7 +37,7 @@ class Loan(models.Model):
     extended = models.BooleanField(help_text = "Has the borrower requested to extend the due date?", default = False)
 
     def __str__(self):
-        return f"Borrower: {self.borrower} book: {self.book}"
+        return f"Borrower: {self.borrower}. Book: {self.book}"
 
     @property
     def short_status(self):

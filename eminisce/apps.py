@@ -20,9 +20,9 @@ class EminisceAppConfig(AppConfig):
 
         # UPDATE: Good news, background_tasks actually works here!
         # This is a really bad idea but it gets the job done
-        print(f"{sys.argv} {os.environ.get('RUN_MAIN', None)}")
+        #print(f"{sys.argv} {os.environ.get('RUN_MAIN', None)}")
         if os.environ.get('RUN_MAIN', None) != 'true': # Don't execute on the autoreload thread           
-            if 'collectstatic' not in sys.argv and 'makemigrations' not in sys.argv and 'migrate' not in sys.argv and 'process_tasks' not in sys.argv:
+            if 'collectstatic' not in sys.argv and 'makemigrations' not in sys.argv and 'migrate' not in sys.argv and 'process_tasks' not in sys.argv and 'shell' not in sys.argv and 'createsuperuser' not in sys.argv:
                 startTasks = True
                 
                 if (os.environ.get("DYNO")): # If running on heroku, make sure to only run on 1 process

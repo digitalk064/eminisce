@@ -26,7 +26,7 @@ class Fine(models.Model):
     paid_date = models.DateTimeField(help_text = "The date the user has paid for this fine.", null=True)
 
     def __str__(self):
-        return "Borrower: " + self.borrower + " " + self.amount + " SGD"
+        return f"User: {self.borrower}. Amount: {self.amount} SGD"
 
     @property
     def short_status(self):

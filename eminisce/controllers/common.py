@@ -25,7 +25,7 @@ def index(request):
         context = {"home_active" : "active"} #change navbar active element
 
         return render(request, "librarian/index.html", context)
-    
+    # If the user is not a staff, take user to the normal library user page
     else:
 
         return user_index.index(request)
