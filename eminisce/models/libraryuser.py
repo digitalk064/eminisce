@@ -37,7 +37,7 @@ class LibraryUser(models.Model):
     #idnum = models.CharField(max_length=30, help_text="Identification number of the library user. Copied over from the username of the user", editable=False)
     fullname = models.CharField(max_length=100, help_text="Full name of the library user.", verbose_name = "Full name")
     status = models.CharField(max_length = 30, choices= Status.choices, default = Status.CANBORROW)
-    user_type = models.CharField(max_length = 30, choices= UserType.choices, default = UserType.STUDENT)
+    user_type = models.CharField(max_length = 30, choices= UserType.choices, default = UserType.STUDENT, help_text="Note: Staff member does NOT mean the account has access privileges as a librarian, it means the account belongs to a faculty member, not a student.")
 
     #Biometrics data
     fingerprint = FixedBinaryInputField(null = True, blank=True, editable=True, default=None)
