@@ -19,7 +19,7 @@ Some accounts you can try:
 **Library user:** username: 20213344 password: 20213344  
 
 ## Instructions
- Please find here our User Manual PDF file: [Eminisce_User_Manual.pdf](https://github.com/digitalk064/eminisce/blob/master/docs/Eminisce_User_Manual.pdf)  
+ Please find here our User Manual PDF file: [Eminisce_User_Manual.pdf](docs/Eminisce_User_Manual.pdf)  
  ***Read from page 4 for instructions on setting up the Web Application.***
  
 ## Developers
