@@ -21,6 +21,7 @@ Some accounts you can try:
 ## Instructions
  Please find here our User Manual PDF file: [Eminisce_User_Manual.pdf](docs/Eminisce_User_Manual.pdf)  
  ***Read from page 4 for instructions on setting up the Web Application.***
+ ***IMPORTANT: After following step 8, Section 2.1 in the PDF, please activate your Django virtual environment, cd to the root of the project folder and run the following command:*** `python manage.py collectstatic`.
  
 ## Developers
 Lead: **Le Vu Nguyen Khanh**  
