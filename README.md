@@ -11,9 +11,9 @@ The web application is designed for three user groups: _library users_, _librari
 **Administrators** has superuser access to Django's control panel, as well as all the functionalities of a librarian.
 
 ## Live demo
-You can try the web application using our cloud hosted website: https://214.thebottom.top/ or on HerokuApp: https://eminisce.herokuapp.com/
-Some accounts you can try:
+You can try the web application using our cloud hosted website: https://214.thebottom.top/ or on HerokuApp: https://eminisce.herokuapp.com/  
 
+Some accounts you can try:  
 **Administrator:** username: admin password: admin  
 **Librarian:** username: johnwatson password: johnwatson  
 **Library user:** username: 20213344 password: 20213344  
